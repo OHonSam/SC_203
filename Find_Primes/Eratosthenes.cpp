@@ -38,9 +38,9 @@ bool isPrimeEratosthenes(vector<bool>& sieve, int n);
 // }
 int main() { 
     const string path = "randomData.txt";
-    writeFile(fout, path,10000);//generate 1000 random integers with a given 'limit' value and write to file 
+    writeFile(fout, path,1000);//generate 1000 random integers with a given 'limit' value and write to file 
 
-    vector<bool> sieve = genSieveEratosthenes(10000);//generate sieve of eratosthenes with the size of 'limit' numbers (both prime and not prime numbers)(the size is also the 'limit' value)
+    vector<bool> sieve = genSieveEratosthenes(1000);//generate sieve of eratosthenes with the size of 'limit' numbers (both prime and not prime numbers)(the size is also the 'limit' value)
 
     vector<int> randomData;
     readFile(fin, path, randomData);

@@ -12,8 +12,8 @@ using namespace std;
 ofstream fout;
 ifstream fin;
 
-vector<bool> genSieveEratosthenes();
-void writeFile(ofstream& fout, const string& path);
+vector<bool> genSieveEratosthenes(int limit);
+void writeFile(ofstream& fout, const string& path, int limit);
 void readFile(ifstream& fin, const string& path, vector<int>& v);
 bool isPrimeEratosthenes(vector<bool>& sieve, int n);
 
@@ -38,9 +38,9 @@ bool isPrimeEratosthenes(vector<bool>& sieve, int n);
 // }
 int main() { 
     const string path = "randomData.txt";
-    writeFile(fout, path);//generate 1000 random integers and write to file 
+    writeFile(fout, path,10000);//generate 1000 random integers with a given 'limit' value and write to file 
 
-    vector<bool> sieve = genSieveEratosthenes();//generate sieve of eratosthenes with the size of 10000 numbers (both prime and not prime numbers)
+    vector<bool> sieve = genSieveEratosthenes(10000);//generate sieve of eratosthenes with the size of 'limit' numbers (both prime and not prime numbers)(the size is also the 'limit' value)
 
     vector<int> randomData;
     readFile(fin, path, randomData);
@@ -56,19 +56,19 @@ int main() {
     }
 
  }
-vector<bool> genSieveEratosthenes() {
+vector<bool> genSieveEratosthenes(int limit) {
     auto start = chrono::high_resolution_clock::now();
 
-    int n = 10000;
+    //int n = 10000;
 
-    vector<bool> primes(n, true);
+    vector<bool> primes(limit, true);
 
     primes[0] = false;
     primes[1] = false;
 
-    for (int i = 2; i <= sqrt(n); i++) {
+    for (int i = 2; i <= sqrt(limit); i++) {
         if (primes[i] == true) {
-            for (int j = i * i; j <= n; j+=i) {
+            for (int j = i * i; j <= limit; j+=i) {
                 primes[j] = false;
             }
         }
@@ -85,11 +85,11 @@ vector<bool> genSieveEratosthenes() {
 
     return primes;
 }
-void writeFile(ofstream& fout, const string& path) {
+void writeFile(ofstream& fout, const string& path, int limit) {
     fout.open(path);
 
     for (int i = 0; i < 1000; ++i) {
-        fout << rand() % 10000 << " ";
+        fout << rand() % limit<< " ";
     }
 
     fout.close();
